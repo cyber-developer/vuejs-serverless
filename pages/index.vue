@@ -1,65 +1,79 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center>
-    <v-flex
-      xs12
-      sm8
-      md6>
-      <div class="text-xs-center">
-        <logo/>
-        <vuetify-logo/>
-      </div>
-      <v-card>
-        <v-card-title class="headline">Welcome to the Vuetify + Nuxt.js template</v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>For more information on Vuetify, check out the <a
-            href="https://vuetifyjs.com"
-            target="_blank">documentation</a>.</p>
-          <p>If you have questions, please join the official <a
-            href="https://chat.vuetifyjs.com/"
-            target="_blank"
-            title="chat">discord</a>.</p>
-          <p>Find a bug? Report it on the github <a
-            href="https://github.com/vuetifyjs/vuetify/issues"
-            target="_blank"
-            title="contribute">issue board</a>.</p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank">Nuxt Documentation</a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank">Nuxt GitHub</a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer/>
-          <v-btn
-            color="primary"
-            flat
-            nuxt
-            to="/inspire">Continue</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
+  <v-layout justify-start column style="height: 100%">
+    <div class="title">
+      <h1 class="align-right">Nurses</h1>
+    </div>
+    <v-divider ></v-divider>
+    <div class="nurses">
+      <nuxt-link to="/1" class="nurse elevation-5 link-undecorated">
+        <div class="row-flex">
+          <div class="avatar elevation-2"></div>
+          <h3>Winnie</h3>
+        </div>
+        <div>
+          Registered Nurse
+        </div>
+      </nuxt-link>
+      <nuxt-link to="/1" class="nurse elevation-5 link-undecorated">
+        <div class="row-flex">
+          <div class="avatar elevation-2"></div>
+          <h3>Winnie</h3>
+        </div>
+        <div>
+          Registered Nurse
+        </div>
+      </nuxt-link>
+      <nuxt-link to="/1" class="nurse elevation-5 link-undecorated">
+        <div class="row-flex">
+          <div class="avatar elevation-2"></div>
+          <h3>Winnie</h3>
+        </div>
+        <div>
+          Registered Nurse
+        </div>
+      </nuxt-link>
+    </div>
   </v-layout>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
-  }
+
 }
 </script>
+
+<style scoped>
+  .title {
+    margin-bottom: 20px;
+  }
+  .nurses {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
+  .nurses .nurse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 200px;
+    min-height: 150px;
+    margin: 0 10px;
+    padding: 0px 20px;
+  }
+  .nurse .row-flex {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .nurse .row-flex * {
+    margin: 0 10px;
+  }
+  .nurse .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+  }
+</style>
+
