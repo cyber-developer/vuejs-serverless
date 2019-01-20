@@ -4,32 +4,19 @@
       <h1 class="align-right">Nurses</h1>
     </div>
     <v-divider ></v-divider>
-    <div class="nurses">
-      <nuxt-link to="/1" class="nurse elevation-5 link-undecorated">
+    <div 
+      class="nurses">
+      <nuxt-link 
+        v-for="nurse in nurses"
+        :key="nurse.id"
+        :to="`/${nurse.id}`" 
+        class="nurse elevation-5 link-undecorated">
         <div class="row-flex">
           <div class="avatar elevation-2"></div>
-          <h3>Winnie</h3>
+          <h3>{{nurse.firstname + ' ' + nurse.lastname}}</h3>
         </div>
         <div>
-          Registered Nurse
-        </div>
-      </nuxt-link>
-      <nuxt-link to="/1" class="nurse elevation-5 link-undecorated">
-        <div class="row-flex">
-          <div class="avatar elevation-2"></div>
-          <h3>Winnie</h3>
-        </div>
-        <div>
-          Registered Nurse
-        </div>
-      </nuxt-link>
-      <nuxt-link to="/1" class="nurse elevation-5 link-undecorated">
-        <div class="row-flex">
-          <div class="avatar elevation-2"></div>
-          <h3>Winnie</h3>
-        </div>
-        <div>
-          Registered Nurse
+          {{nurse.job_title}}
         </div>
       </nuxt-link>
     </div>
@@ -37,8 +24,21 @@
 </template>
 
 <script>
-export default {
+import { mapActions, mapGetters } from 'vuex'
 
+export default {
+  computed: {
+    ...mapGetters(['nurses'])
+  },
+  mounted() {
+    this.getNurses();
+  },
+  methods: {
+    ...mapActions(['getNurses'])
+  },
+  async asyncData ({store}) {
+    await store.dispatch('getNurses');
+  }
 }
 </script>
 
@@ -48,6 +48,7 @@ export default {
   }
   .nurses {
     display: flex;
+    flex-wrap: wrap;
     flex-grow: 1;
     align-items: center;
     justify-content: center;
@@ -58,6 +59,7 @@ export default {
     align-items: center;
     justify-content: space-around;
     min-width: 200px;
+    width: 250px;
     min-height: 150px;
     margin: 0 10px;
     padding: 0px 20px;
@@ -71,6 +73,7 @@ export default {
     margin: 0 10px;
   }
   .nurse .avatar {
+    min-width: 80px;
     width: 80px;
     height: 80px;
     border-radius: 80px;
