@@ -4,7 +4,7 @@
       <h1 class="align-right">Nurse</h1>
     </div>
     <v-divider ></v-divider>
-    <div class="nurse">
+    <div class="nurse" v-if="nurse.length > 0">
       <v-card class="bio">
         <div class="avatar elevation-2"></div>
         <span class="name">{{nurse[0].firstname + ' ' + nurse[0].lastname}}</span>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import api from '@/services/RestService'
 
 export default {
@@ -55,14 +55,17 @@ export default {
       nurse: 'activeNurse'
     })
   },
+  mounted() {
+    this.getNurse(this.$route.params.id);
+  },
   methods: {
+    ...mapActions(['getNurse']),
     displayForm() {
       this.showForm = true;
     },
     submit() {
       this.form.nurseId = this.id;
       this.showForm = false;
-      console.log(this.form.eid);
       if(!this.form.eid)
         api.post("experience", this.form)
           .then(res => this.showForm = null)
@@ -82,7 +85,12 @@ export default {
     }
   },
   async asyncData ({store, params}) {
+    try{
     await store.dispatch('getNurse', params.id);
+    }
+    catch(err) {
+      this.window.location = "http://localhost:3000/" + params.id;
+    }
   }
 }
 </script>

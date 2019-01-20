@@ -50,8 +50,13 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'https://k9gpvso2ge.execute-api.ap-northeast-2.amazonaws.com/beta/',
+    proxy: false
   },
-
+  proxy: {
+    //'/api/': 'https://k9gpvso2ge.execute-api.ap-northeast-2.amazonaws.com/beta/'
+    '/api/' : { target: 'http://localhost:3000', pathRewrite: { '^/api' : '' } }
+  },
   /*
   ** Build configuration
   */

@@ -26,7 +26,7 @@ const createStore= () => new Vuex.Store({
       }
     },
     actions: {
-      getNurses: ({commit}) => {
+      getNurses: function({commit}) {
         return new Promise((resolve, reject) => {
           api.get('nurses')
             .then(res => {
@@ -47,7 +47,6 @@ const createStore= () => new Vuex.Store({
               resolve();
             })
             .catch(err => {
-              console.log(err);
               reject(err);
             })
         })

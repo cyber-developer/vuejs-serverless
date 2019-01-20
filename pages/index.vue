@@ -31,7 +31,7 @@ export default {
     ...mapGetters(['nurses'])
   },
   mounted() {
-    this.getNurses();
+    //this.getNurses();
   },
   methods: {
     ...mapActions(['getNurses'])
