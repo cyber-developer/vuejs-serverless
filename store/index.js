@@ -7,19 +7,22 @@ Vue.use(Vuex)
 const createStore= () => new Vuex.Store({
     state: () => ({
       nurses: [],
-      active_nurse: {}
+      activeNurse: {}
     }),
     mutations: {
       SET_NURSES: (state, data) => {
         Vue.set(state, 'nurses', data)
       },
       SET_ACTIVE_NURSE: (state, data) => {
-        Vue.set(state, 'active_nurse', data)
+        Vue.set(state, 'activeNurse', data)
       }
     },
     getters: {
       nurses: (state) => {
         return state.nurses;
+      },
+      activeNurse: (state) => {
+        return state.activeNurse;
       }
     },
     actions: {
@@ -35,7 +38,20 @@ const createStore= () => new Vuex.Store({
               reject(err);
             })
         })
-      }
+      },
+      getNurse: ({commit}, id) => {
+        return new Promise((resolve, reject) => {
+          api.get('nurses/' + id)
+            .then(res => {
+              commit("SET_ACTIVE_NURSE", JSON.parse(res.data.body));
+              resolve();
+            })
+            .catch(err => {
+              console.log(err);
+              reject(err);
+            })
+        })
+      },
     }
 })
 
